@@ -1,0 +1,36 @@
+const locale = {
+   Booking: 'booking',
+   Payment: 'Payment',
+   Success: 'Success',
+   Complete_Vote: 'Complete & Vote',
+
+   Booking_for_me: 'Booking for me',
+   Fill_Information_And_Check_Validate: 'Fill Information And Check Validate',
+   Login_with_name: 'Login with name',
+   Contact_Information: 'Contact Information',
+   Contact_information_Receive_payment_invoice: 'Contact information ( Receive payment invoice )',
+   Fullname: 'Fullname',
+   Passport_or_CCCD: 'Passport or CCCD',
+   Phonenumber: 'Phonenumber',
+   Passenger_information: 'Passenger information',
+   Passenger1: 'Passenger 1',
+   Nickname: 'Nickname',
+   National: 'National',
+   Continue: 'Continue',
+   Back: 'Back',
+
+   Check_Validate_Again_And_Chose_Payment: 'Check Validate Again And Chose Payment',
+   Payment_Card: 'Payment Card',
+   Card_number: 'Card number',
+   Expiry_date: 'Expiry date',
+   Full_name: 'Full name',
+   Save_card_information: 'Save card information',
+   Price_Details: 'Price Details',
+   State_Date_End_Date: 'State Date - End Date',
+   Guide_Information: 'Guide Information',
+   Total_price: 'Total price',
+   discount_advance: 'Only 30% deposit in advance',
+   I_agree_to_the_above_agreements: 'I agree to the above agreements',
+};
+
+export default locale;
