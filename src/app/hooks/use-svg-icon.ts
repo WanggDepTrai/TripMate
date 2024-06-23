@@ -4,18 +4,18 @@ export const useSvgIcon = (name: string) => {
    const importedIconRef = useRef<ElementType>();
    const [isLoading, setIsLoading] = useState(false);
    const [error, setError] = useState<Error>();
-console.log(process.env.NODE_ENV);
+
    useEffect(() => {
       setIsLoading(true);
 
       const importSvgIcon = async (): Promise<void> => {
          try {
-            const svgIcon =
-               process.env.NODE_ENV === 'production'
-                  ? await import(`./${name}.svg`)
-                  : await import(`../assets/icons/${name}.svg`);
+            // const svgIcon =
+            //    process.env.NODE_ENV === 'production'
+            //       ? await import(`./${name}.svg`)
+            //       : await import(`../assets/icons/${name}.svg`);
 
-            const { ReactComponent } = svgIcon as {
+            const { ReactComponent } = (await import(`../assets/icons/${name}.svg`)) as {
                ReactComponent: ElementType;
             };
 
