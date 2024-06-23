@@ -18,14 +18,28 @@ import { LANGUAGE, LOCALSTORAGE_LANGUAGE_KEY } from '@constants';
 import { QueryClient, QueryClientProvider, focusManager } from '@tanstack/react-query';
 import { InitApp } from '@helpers';
 
+const storedLanguage = localStorage.getItem(LOCALSTORAGE_LANGUAGE_KEY);
+
+let selectedLanguage;
+
+if (storedLanguage) {
+   try {
+      selectedLanguage = JSON.parse(storedLanguage);
+   } catch (e) {
+      // Nếu parse thất bại, sử dụng giá trị mặc định
+      selectedLanguage = LANGUAGE.VI;
+   }
+} else {
+   selectedLanguage = LANGUAGE.VI;
+}
+
+// Kiểm tra ngôn ngữ đã lưu
+const lng = selectedLanguage === LANGUAGE.VI ? LANGUAGE.VI : LANGUAGE.EN;
+
 void i18next.init({
    resources,
    interpolation: { escapeValue: false },
-   lng: localStorage.getItem(LOCALSTORAGE_LANGUAGE_KEY)
-      ? JSON.parse(localStorage.getItem(LOCALSTORAGE_LANGUAGE_KEY) as string) === LANGUAGE.VI
-         ? LANGUAGE.VI
-         : LANGUAGE.EN
-      : LANGUAGE.VI,
+   lng: lng,
 });
 
 const queryClient = new QueryClient();
