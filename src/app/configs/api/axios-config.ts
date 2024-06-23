@@ -43,7 +43,7 @@ const createInstance = <T extends { data: AxiosResponseData }, D>(baseURL: strin
       // error response
       async (error: any): Promise<any> => {
          if (httpStatusCode.UNAUTHORIZED === error?.response?.status) {
-             localStorage.removeItem(SETTINGS_CONFIG.ACCESS_TOKEN_KEY);
+            localStorage.clear();
          }
 
          return Promise.reject(error);

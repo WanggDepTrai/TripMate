@@ -8,7 +8,7 @@ import languages from '../client/header-client/i18n';
 
 const Header = () => {
    const translate = useI18n(languages);
-   const { isAuhthentication, authLogout,user } = useAuth();
+   const { isAuhthentication, authLogout, user } = useAuth();
    const navigate = useNavigate();
    const { getLocalStorage } = useLocalStorage();
    const handleLogout = () => {

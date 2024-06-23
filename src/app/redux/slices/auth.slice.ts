@@ -40,6 +40,7 @@ export const authSlice = createSlice({
       },
 
       actionLogoutReducer: (state) => {
+         localStorage.clear();
          state.isAuhthentication = false;
          state.user = null;
       },

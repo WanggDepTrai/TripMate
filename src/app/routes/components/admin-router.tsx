@@ -9,7 +9,7 @@ export function AdminRouter({ children }: { children?: React.ReactNode }) {
    const { isAuhthentication } = useAuth();
    const { getLocalStorage } = useLocalStorage();
 
-   if (!isAuhthentication || getLocalStorage('role') !== ROLES[0]) {
+   if (!isAuhthentication || getLocalStorage('role') && getLocalStorage('role') !== ROLES[0]) {
       return <Navigate to="/" replace />;
    }
 

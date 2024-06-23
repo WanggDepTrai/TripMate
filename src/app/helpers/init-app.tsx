@@ -7,18 +7,20 @@ import { ROLES } from '../constants';
 import { useQuery } from '@tanstack/react-query';
 import { useLocalStorage } from '../hooks/use-local-storage';
 import { useEffect } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 // import { LOCALSTORAGE_LANGUAGE_KEY } from '@constants';
 // import { useLocalStorage } from '@hooks';
 
 export const InitApp = (props: { children: React.ReactNode }) => {
-   const {authLogin} = useAuth();
+   const { authLogin } = useAuth();
+   // const navigate = useNavigate();
 
    const { getLocalStorage } = useLocalStorage();
 
    const ROLE = getLocalStorage(SETTINGS_CONFIG.ROLE);
 
-   const apiGetMePath = ROLE === ROLES[2] ? 'users/me' : ROLE === ROLES[1]  ? 'guides/me' : 'users/me';
+   const apiGetMePath = ROLE === ROLES[2] ? 'users/me' : ROLE === ROLES[1] ? 'guides/me' : 'users/me';
 
    const { data } = useQuery(['getUserInfo'], async () => {
       const res = await serviceApi.request.get(apiGetMePath);

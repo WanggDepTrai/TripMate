@@ -55,5 +55,5 @@ export const SETTINGS_CONFIG: SettingConfig = {
 
    API_URL: VITE_API_URL as string,
 
-   ROLE: 'role',
+   ROLE: 'trip-mate-role',
 };
