@@ -10,7 +10,7 @@ export const useSvgIcon = (name: string) => {
 
       const importSvgIcon = async (): Promise<void> => {
          try {
-            const { ReactComponent } = (await import(`../assets/icons/${name}.svg`)) as {
+            const { ReactComponent } = (await import(`../assets/icons/${name}.svg`) || import(`../${name}.svg`) ) as {
                ReactComponent: ElementType;
             };
 

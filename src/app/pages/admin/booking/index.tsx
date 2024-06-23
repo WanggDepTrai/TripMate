@@ -61,25 +61,14 @@ export const Booking = () => {
          confirmOk: 'Xác nhận',
          content: 'Xác nhận đã thanh toán hóa đơn',
          callbackOK: async () => {
-            await axios
-               .put(
-                  `${process.env.VITE_API_URL}/api/v1/bookings/${id}/status?status=1`,
-                  {},
-                  {
-                     headers: {
-                        Authorization: `Bearer ${localStorage
-                           .getItem(SETTINGS_CONFIG.ACCESS_TOKEN_KEY)
-                           ?.replace(/"/g, '')}`,
-                     },
-                  },
-               )
-               .then((response) => {
-                  console.log(response.data);
-                  if (response.data.isSuccess) {
+            await serviceApi.request
+               .put(`bookings/${id}/status?status=1`, {})
+               .then((response: any) => {
+                  if (response.isSuccess) {
                      refetch();
-                     return toast.success(response.data.message);
+                     return toast.success(response.message);
                   }
-                  return toast.error(response.data.message);
+                  return toast.error(response.message);
                })
                .catch((error) => {
                   console.log(error);

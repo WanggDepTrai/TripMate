@@ -46,7 +46,6 @@ const BaseFromSignIn = () => {
       await axios
          .post(process.env.VITE_API_URL + '/api/auth/login', data)
          .then((response) => {
-            console.log(response.data);
             if (response.data.isSuccess) {
                setLocalStorage(SETTINGS_CONFIG.ACCESS_TOKEN_KEY, response.data.data.token);
                setLocalStorage(SETTINGS_CONFIG.ROLE, response.data.data.role);

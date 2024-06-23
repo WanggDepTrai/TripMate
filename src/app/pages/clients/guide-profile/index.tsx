@@ -5,7 +5,7 @@ import { LanguageSystem, LazyLoadingImage } from '@components';
 import { SETTINGS_CONFIG, serviceApi } from '@configs';
 import { SvgIcon, convertToDate, priceFormat } from '@helpers';
 import { useI18n } from '@hooks';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { useCallback, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import languages from './i18n';
@@ -26,6 +26,38 @@ export const GuideProfile = () => {
    const { data } = useQuery(['getGuildPagination'], async () => {
       const res = await serviceApi.request.get(`guides/${id}`);
       return res.data;
+   });
+
+   const { mutate } = useMutation({
+      mutationKey: ['bookings-customer'],
+      mutationFn: async (data: ValidationForm) => {
+         console.log(1);
+         const res = await serviceApi.request.post(`bookings-customer`, {
+            ...data,
+            GuideID: id,
+         });
+         console.log(res.data);
+         return res;
+      },
+      onSuccess: (response: any) => {
+         console.log(data);
+         if (response.isSuccess) {
+            toast.success(response.message);
+            if (Number(watch('paymentMethod')) === 1) {
+               console.log(response.data);
+               return navigate(
+                  ROUTE_PATH.BOOKING +
+                     '/' +
+                     response.data.id +
+                     '?price=' +
+                     priceFormat(Number(watch('totalHour')) * 100000),
+               );
+            }
+            setBookingAction(0);
+            return reset();
+         }
+         return toast.error(response.message);
+      },
    });
 
    const changeNumberAllow = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,39 +98,10 @@ export const GuideProfile = () => {
    });
 
    const onSubmit = async (data: ValidationForm) => {
-      await serviceApi.request
-         .post(process.env.VITE_API_URL + '/api/v1/bookings-customer', {
-            ...data,
-            GuideID: id,
-            totalHour: Number(data.totalHour),
-            BookingDate: convertToDate(new Date(data.BookingDate)),
-         })
-         .then((response) => {
-            if (response.data.isSuccess) {
-               toast.success(response.data.message);
-               
-               if (Number(watch('paymentMethod')) === 1) {
-                  console.log(response.data);
-                  return navigate(
-                     ROUTE_PATH.BOOKING +
-                        '/' +
-                        response.data.data.id +
-                        '?price=' +
-                        priceFormat(Number(watch('totalHour')) * 100000),
-                  );
-               }
-
-               setBookingAction(0);
-               return reset();
-            }
-
-            return toast.error(response.data.message);
-         })
-         .catch((error) => {
-            // handle errors
-            console.log(error);
-         });
+      console.log(data);
+      mutate(data);
    };
+
    const onClickNextAction = useCallback(() => {
       if (watch('totalHour') === '') {
          setError('totalHour', { message: translate('total_hour_required') });
@@ -153,7 +156,21 @@ export const GuideProfile = () => {
                         </div>
                      </div>
                      <div className="bg-[#78B28D] flex flex-col items-center justify-center rounded-2xl px-8">
-                        <SvgIcon name="find-guide" width={63} />
+                        <svg
+                           xmlns="http://www.w3.org/2000/svg"
+                           fill="none"
+                           viewBox="0 0 24 24"
+                           strokeWidth={1.5}
+                           stroke="currentColor"
+                           className="size-6"
+                        >
+                           <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="m10.5 21 5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 0 1 6-.371m0 0c1.12 0 2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061 1.785.147 2.666.257m-4.589 8.495a18.023 18.023 0 0 1-3.827-5.802"
+                           />
+                        </svg>
+
                         <p className="text-[#6D1950] font-bold">{translate('Find_Guide')}</p>
                      </div>
                   </div>
