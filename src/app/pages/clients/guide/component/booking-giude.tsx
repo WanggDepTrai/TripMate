@@ -9,6 +9,7 @@ import axios from 'axios';
 import { convertToDate } from '@helpers';
 import type { GuidItem } from '..';
 import { toast } from 'react-toastify';
+import { serviceApi } from '@configs';
 
 const BookingGiude = ({ guides }: { guides: any }) => {
    const translate = useI18n(languages);
@@ -62,22 +63,21 @@ const BookingGiude = ({ guides }: { guides: any }) => {
    });
    const onSubmit = async (data: ValidationForm) => {
       console.log(data.StartTime);
-      await axios
-         .post(process.env.VITE_API_URL + '/api/v1/bookings-guest', {
+      await serviceApi.request
+         .post('bookings-guest', {
             ...data,
             paymentMethod: 0,
             // GuideID: '1cf4ec95-3664-418c-fd1a-08dc7fa35e5a',
             // StartTime: '00:00',
             BookingDate: convertToDate(new Date(data.BookingDate)),
          })
-         .then((response) => {
-            console.log(response);
-            if (response.data.isSuccess) {
+         .then((response: any) => {
+            if (response.isSuccess) {
                reset();
-               return toast.success(response.data.message);
+               return toast.success(response.message);
             }
 
-            return toast.error(response.data.message);
+            return toast.error(response.message as string);
          })
          .catch((error) => {
             // handle errors
