@@ -9,12 +9,12 @@ function PublicRouter({ children }: { children?: React.ReactNode }) {
    const { isAuhthentication } = useAuth();
    const { getLocalStorage } = useLocalStorage();
    if (isAuhthentication && getLocalStorage(SETTINGS_CONFIG.ROLE)) {
-      const redirectRoute = '/'
-         // getLocalStorage(SETTINGS_CONFIG.ROLE) === ROLES[0]
-         //    ? ROUTE_PATH.ADMIN_HOME
-         //    : getLocalStorage(SETTINGS_CONFIG.ROLE) === ROLES[1]
-         //    ? ROUTE_PATH.GUIDE_HOME
-         //    : ROUTE_PATH.CLIENT_HOME;
+      const redirectRoute =
+         getLocalStorage(SETTINGS_CONFIG.ROLE) === ROLES[0]
+            ? ROUTE_PATH.ADMIN_HOME
+            : getLocalStorage(SETTINGS_CONFIG.ROLE) === ROLES[1]
+            ? ROUTE_PATH.GUIDE_HOME
+            : ROUTE_PATH.CLIENT_HOME;
 
       return <Navigate to={redirectRoute} />;
    }

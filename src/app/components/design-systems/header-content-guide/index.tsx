@@ -2,7 +2,6 @@ import { useAuth } from '~/app/redux/slices';
 import { useConfirm } from '../CoreComfirm';
 import { useMutation } from '@tanstack/react-query';
 import { serviceApi } from '@configs';
-import { useEffect } from 'react';
 
 export const HeaderContetnGuide = () => {
    const { user, authLogin } = useAuth();

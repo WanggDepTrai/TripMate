@@ -7,7 +7,6 @@ import { ROLES } from '../constants';
 import { useQuery } from '@tanstack/react-query';
 import { useLocalStorage } from '../hooks/use-local-storage';
 import { useEffect } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
 
 // import { LOCALSTORAGE_LANGUAGE_KEY } from '@constants';
 // import { useLocalStorage } from '@hooks';
@@ -22,15 +21,16 @@ export const InitApp = (props: { children: React.ReactNode }) => {
 
    const apiGetMePath = ROLE === ROLES[2] ? 'users/me' : ROLE === ROLES[1] ? 'guides/me' : 'users/me';
 
-   const { data } = useQuery(['getUserInfo'], async () => {
+   const { data, isSuccess } = useQuery(['getUserInfo'], async () => {
       const res = await serviceApi.request.get(apiGetMePath);
       return res.data;
    });
 
    useEffect(() => {
-      if (data) {
+      if (isSuccess) {
          return authLogin(data);
       }
+      return;
    }, [data]);
 
    return props.children;

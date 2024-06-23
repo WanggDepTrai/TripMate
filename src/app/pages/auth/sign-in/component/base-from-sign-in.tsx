@@ -13,6 +13,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import { useAuth } from '~/app/redux/slices';
 import { toast } from 'react-toastify';
+import { SETTINGS_CONFIG } from '@configs';
 
 const BaseFromSignIn = () => {
    const translate = useI18n(languages);
@@ -47,8 +48,8 @@ const BaseFromSignIn = () => {
          .then((response) => {
             console.log(response.data);
             if (response.data.isSuccess) {
-               setLocalStorage('trip_mate_token', response.data.data.token);
-               setLocalStorage('role', response.data.data.role);
+               setLocalStorage(SETTINGS_CONFIG.ACCESS_TOKEN_KEY, response.data.data.token);
+               setLocalStorage(SETTINGS_CONFIG.ROLE, response.data.data.role);
                toast.success('Đăng nhập thành công!');
                return authLogin(response.data.data);
 

@@ -2,12 +2,12 @@ import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { images } from '@assets/images';
 import { LanguageSystem, LazyLoadingImage } from '@components';
-import { SETTINGS_CONFIG, createInstance, serviceApi } from '@configs';
+import { SETTINGS_CONFIG, serviceApi } from '@configs';
 import { SvgIcon, convertToDate, priceFormat } from '@helpers';
 import { useI18n } from '@hooks';
 import { useQuery } from '@tanstack/react-query';
-import { useCallback, useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useCallback, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import languages from './i18n';
 import { regexs } from '@utils';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -66,26 +66,17 @@ export const GuideProfile = () => {
    });
 
    const onSubmit = async (data: ValidationForm) => {
-      const config = {
-         headers: {
-            Authorization: `Bearer ${localStorage.getItem(SETTINGS_CONFIG.ACCESS_TOKEN_KEY)?.replace(/"/g, '')}`,
-         },
-      };
-      await axios
-         .post(
-            process.env.VITE_API_URL + '/api/v1/bookings-customer',
-            {
-               ...data,
-               GuideID: id,
-               totalHour: Number(data.totalHour),
-               BookingDate: convertToDate(new Date(data.BookingDate)),
-            },
-            config,
-         )
+      await serviceApi.request
+         .post(process.env.VITE_API_URL + '/api/v1/bookings-customer', {
+            ...data,
+            GuideID: id,
+            totalHour: Number(data.totalHour),
+            BookingDate: convertToDate(new Date(data.BookingDate)),
+         })
          .then((response) => {
             if (response.data.isSuccess) {
                toast.success(response.data.message);
-               console.log(watch('paymentMethod') === 1);
+               
                if (Number(watch('paymentMethod')) === 1) {
                   console.log(response.data);
                   return navigate(

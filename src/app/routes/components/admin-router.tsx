@@ -1,4 +1,5 @@
 // import { useAuth } from '@App/redux/slices/auth.slice';
+import { SETTINGS_CONFIG } from '@configs';
 import { ROLES } from '@constants';
 import { useLocalStorage } from '@hooks';
 import React from 'react';
@@ -8,8 +9,11 @@ import { useAuth } from '~/app/redux/slices';
 export function AdminRouter({ children }: { children?: React.ReactNode }) {
    const { isAuhthentication } = useAuth();
    const { getLocalStorage } = useLocalStorage();
-
-   if (!isAuhthentication || getLocalStorage('role') && getLocalStorage('role') !== ROLES[0]) {
+   
+   if (
+      !isAuhthentication ||
+      (getLocalStorage(SETTINGS_CONFIG.ROLE) && getLocalStorage(SETTINGS_CONFIG.ROLE) !== ROLES[0])
+   ) {
       return <Navigate to="/" replace />;
    }
 

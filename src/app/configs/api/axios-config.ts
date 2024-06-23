@@ -9,6 +9,7 @@ import axios, {
 import middleware from './middleware';
 import { httpStatusCode } from '@configs/http-status-code';
 import { SETTINGS_CONFIG } from '@configs/settings';
+import { toast } from 'react-toastify';
 
 const createInstance = <T extends { data: AxiosResponseData }, D>(baseURL: string) => {
    const config: AxiosRequestConfig<T> = {
@@ -44,6 +45,8 @@ const createInstance = <T extends { data: AxiosResponseData }, D>(baseURL: strin
       async (error: any): Promise<any> => {
          if (httpStatusCode.UNAUTHORIZED === error?.response?.status) {
             localStorage.clear();
+            toast.error('Vui lòng đăng nhập')
+            console.log('Vui lòng đăng nhập');
          }
 
          return Promise.reject(error);
