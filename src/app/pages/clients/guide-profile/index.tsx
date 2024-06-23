@@ -269,7 +269,7 @@ export const GuideProfile = () => {
                </div>
                <div className="col-span-1 ">
                   <div className="border h-full px-[75px] py-[36px] border-[#000000]">
-                     <p className="text-[24px] font-bold text-[#6D1950]">{translate('ExperiContinueence')}</p>
+                     <p className="text-[24px] font-bold text-[#6D1950]">{translate('Experience')}</p>
                      <ul className="ml-10">
                         <li className="text-[#6D1950] text-lg font-bold list-disc">Có nhiều năm kinh nghiệm</li>
                         <li className="text-[#6D1950] text-lg font-bold list-disc">Vui vẻ hoạt bát</li>
