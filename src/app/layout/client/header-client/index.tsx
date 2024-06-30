@@ -45,7 +45,7 @@ export const HeaderClient = () => {
                      <Link
                         to={item.link}
                         key={index}
-                        className="h-full flex items-center justify-center uppercase hover:text-[#6D1950] font-bold text-[#6D1950]"
+                        className="h-full flex items-center justify-center uppercase hover:text-[#310321] hover:underline font-bold text-[#6D1950]"
                      >
                         {item.title}
                      </Link>

@@ -144,7 +144,7 @@ const StepBooking = ({ handleNextStep }: any) => {
          </section>
          <div className="flex justify-end">
             <button
-               className="bg-red-700 text-white px-4 py-2 rounded-md shadow-sm hover:bg-red-600 transition duration-200"
+               className="bg-red-700 text-white px-4 py-2 rounded-md shadow-sm hover:bg-red-600 transition duration-200 hover:bg-red-800"
                onClick={handleNextStep}
             >
                {translate('Continue')}

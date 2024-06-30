@@ -202,7 +202,7 @@ const BookingGiude = ({ guides }: { guides: any }) => {
          <div className="flex justify-center mt-4">
             <button
                type="submit"
-               className="px-12 py-4 text-center font-bold text-[#F0D171] bg-[#BD4545] min-w-[300px] rounded-2xl"
+               className="px-12 py-4 text-center font-bold text-[#F0D171] bg-[#BD4545] min-w-[300px] rounded-2xl hover:bg-red-800"
             >
                Booking
             </button>

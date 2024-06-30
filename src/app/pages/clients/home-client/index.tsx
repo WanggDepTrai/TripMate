@@ -31,7 +31,7 @@ export const HomeClient = () => {
                <div className=" top-0 left-0 right-0 pt-10 z-[999] absolute">
                   <div className="grid grid-cols-2">
                      <div className="col-span-1">
-                        <button className="rounded-2xl border-[3px] border-[#BD4545] text-[#BD4545] py-1 px-4">
+                        <button className="rounded-2xl border-[3px] border-[#BD4545] text-[#BD4545] hover:bg-red-800 hover:text-white py-1 px-4">
                            {translate('OTHERS')}
                         </button>
                         <div className=" flex items-center gap-2">
@@ -86,7 +86,7 @@ export const HomeClient = () => {
                   <p className="text-[#A6A6A6] text-sm mt-3">How many people?</p>
                </div>
                <div className="">
-                  <button className="p-3 bg-[#78B28D] rounded-lg">
+                  <button className="p-3 bg-[#78B28D] rounded-lg hover:bg-[#30774a] hover:text-white">
                      <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -116,7 +116,7 @@ export const HomeClient = () => {
                <div className="flex items-center justify-center mt-5">
                   <Link
                      to={ROUTE_PATH.CLIENT_GUIDE}
-                     className="p-8 py-2 text-2xl font-bold bg-[#BD4545] text-[#F0D171] rounded-xl"
+                     className="p-8 py-2 text-2xl font-bold bg-[#BD4545] text-[#F0D171] rounded-xl hover:bg-red-800"
                   >
                      {t('VIEW_MORE')}
                   </Link>

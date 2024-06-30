@@ -1,14 +1,10 @@
-import { PaginatedItems, useConfirm } from '@components';
-import { SETTINGS_CONFIG, serviceApi } from '@configs';
+import { PaginatedItems } from '@components';
+import { serviceApi } from '@configs';
 import { cn, priceFormat } from '@helpers';
 import { useSearchParamsHook } from '@hooks';
 import { format } from 'date-fns';
-import { useMutation, useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import { toast } from 'react-toastify';
-import { useRef } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import Modal from './components/modal';
-import { number } from 'yup';
 
 const payMentMethod = ['Tiền mặt', 'Chuyển khoản'] as const;
 
@@ -46,36 +42,12 @@ export const bookingMethod = [
 export const Booking = () => {
    const { searchParams, setParams } = useSearchParamsHook();
 
-   const coreConfirm = useConfirm();
-
    const { data, refetch } = useQuery(['getBooking', searchParams['page']], async () => {
       const page = searchParams['page'] ? String(searchParams['page']) : '1';
 
       const res = await serviceApi.request.get('bookings-filter?pageNumber=' + page);
       return res.data;
    });
-
-   const handleSubmitPayCompleted = async (id: string) => {
-      coreConfirm({
-         title: 'Xác nhận',
-         confirmOk: 'Xác nhận',
-         content: 'Xác nhận đã thanh toán hóa đơn',
-         callbackOK: async () => {
-            await serviceApi.request
-               .put(`bookings/${id}/status?status=1`, {})
-               .then((response: any) => {
-                  if (response.isSuccess) {
-                     refetch();
-                     return toast.success(response.message);
-                  }
-                  return toast.error(response.message);
-               })
-               .catch((error) => {
-                  console.log(error);
-               });
-         },
-      });
-   };
 
    const handleClickModal = (bookingId: string | undefined = undefined) => {
       bookingId && setParams('bookingId', bookingId);
@@ -84,7 +56,7 @@ export const Booking = () => {
    return (
       <div className="grid grid-cols-4 gap-x-4 w-full">
          <div className="col-span-4 bg-white rounded-2xl">
-            <div className="p-5 border-b border-[#E1E1E1]">Listed Guides</div>
+            <div className="p-5 border-b border-[#E1E1E1]">Listed Tours</div>
             <div className="p-5">
                <table className="w-full table-auto">
                   <thead>

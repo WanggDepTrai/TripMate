@@ -134,7 +134,7 @@ const BaseFormRegister = () => {
                   </div> */}
 
                   <div className="flex flex-col gap-y-3 w-full items-center">
-                     <button className="w-full py-3 text-base bg-[#F0D171] flex items-center justify-center font-bold text-[#BD4545]">
+                     <button className="hover:bg-yellow-500 w-full py-3 text-base bg-[#F0D171] flex items-center justify-center font-bold text-[#BD4545]">
                         {translate(`CREATE_ACCOUNT`)}
                      </button>
                      {/* <button className="w-full py-3 text-base bg-[#78B28D] flex items-center justify-center font-bold text-[#BD4545]">
@@ -142,7 +142,7 @@ const BaseFormRegister = () => {
                      </button> */}
                      <div className="text-[13px] flex gap-1 ">
                         <span>{translate(`ALREADY_ACCOUNT`)}</span>
-                        <Link to={ROUTE_PATH.SIGN_IN} className="text-[#b6d3ba]">
+                        <Link to={ROUTE_PATH.SIGN_IN} className="text-[#b6d3ba] hover:text-red-500">
                            {translate(`LOGIN`)}
                         </Link>
                      </div>

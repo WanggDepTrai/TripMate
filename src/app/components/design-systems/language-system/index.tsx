@@ -33,7 +33,7 @@ export const LanguageSystem = () => {
          </div>
          {/* {open && ( */}
             <div
-               className="header-user absolute bg-white rounded-md right-0 top-[92%] group-hover:block hidden"
+               className="header-user absolute bg-white rounded-md right-0 top-[92%] group-hover:block hidden shadow-button"
                style={{ width: 'max-content' }}
                ref={ref}
             >

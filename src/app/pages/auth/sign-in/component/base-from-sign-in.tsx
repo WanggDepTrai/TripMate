@@ -96,7 +96,7 @@ const BaseFromSignIn = () => {
                      {errors.password && <p className="text-sm text-red-500 mt-1">{errors.password?.message}</p>}
                   </div>
                   <div className="flex flex-col gap-y-3 w-full items-center">
-                     <button className="w-full py-3 text-base bg-[#F0D171] flex items-center justify-center font-bold text-[#BD4545]">
+                     <button className="hover:bg-yellow-500 w-full py-3 text-base bg-[#F0D171] flex items-center justify-center font-bold text-[#BD4545]">
                         {translate(`LOGIN`)}
                      </button>
                      {/* <button className="w-full py-3 text-base bg-[#78B28D] flex items-center justify-center font-bold text-[#BD4545]">
@@ -104,13 +104,13 @@ const BaseFromSignIn = () => {
                      </button> */}
                      <div className="text-[13px] flex gap-1 ">
                         <span>{translate(`FROGOT_PASSWORD`)}</span>
-                        <Link to="" className="text-[#b6d3ba]">
+                        <Link to="" className="text-[#b6d3ba] hover:text-red-400">
                            {translate(`CLICK_RESET`)}
                         </Link>
                      </div>
                      <Link
                         to={ROUTE_PATH.REGISTER}
-                        className="w-full py-3 text-base border border-black flex items-center justify-center font-bold text-[#BD4545]"
+                        className="hover:bg-gray-100 w-full py-3 text-base border border-black flex items-center justify-center font-bold text-[#BD4545]"
                      >
                         {translate(`REGISTER`)}
                      </Link>

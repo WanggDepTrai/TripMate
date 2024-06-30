@@ -42,7 +42,7 @@ export const Booking = () => {
                      <div className="text-md">Nội dung chuyển khoản: Tên người dùng + Số điện thoại hoặc email</div>
 
                      <div className="flex items-center justify-center">
-                        <img className=" object-contain" src={images.qr} />
+                        <img className="w-[400px] object-contain" src={images.qr} />
                      </div>
                   </div>
                   {/* <div className="mt-20 flex items-center justify-end ">

@@ -102,7 +102,7 @@ export const Guide = () => {
                                  <p className="mt-2 text-[#BD4545] text-sm">ID: {item.id}</p>
                                  <Link
                                     to={ROUTE_PATH.CLIENT_GUIDE + '/' + item.id}
-                                    className="bg-[#BD4545] text-white px-4 py-2 rounded-xl font-bold text-sm mt-2"
+                                    className="bg-[#BD4545] text-white px-4 py-2 rounded-xl font-bold text-sm mt-2 hover:bg-red-800"
                                  >
                                     View Profile
                                  </Link>

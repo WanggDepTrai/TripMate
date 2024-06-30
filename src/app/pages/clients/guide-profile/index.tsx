@@ -2,8 +2,8 @@ import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { images } from '@assets/images';
 import { LanguageSystem, LazyLoadingImage } from '@components';
-import { SETTINGS_CONFIG, serviceApi } from '@configs';
-import { SvgIcon, convertToDate, priceFormat } from '@helpers';
+import { serviceApi } from '@configs';
+import { SvgIcon, priceFormat } from '@helpers';
 import { useI18n } from '@hooks';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useCallback, useState } from 'react';
@@ -11,7 +11,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import languages from './i18n';
 import { regexs } from '@utils';
 import { yupResolver } from '@hookform/resolvers/yup';
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import { ROUTE_PATH } from '@constants';
 
@@ -50,7 +49,7 @@ export const GuideProfile = () => {
                      '/' +
                      response.data.id +
                      '?price=' +
-                     priceFormat(Number(watch('totalHour')) * 100000),
+                     priceFormat(Number(watch('totalHour')) * 75000),
                );
             }
             setBookingAction(0);
@@ -338,7 +337,7 @@ export const GuideProfile = () => {
                               //    watch('totalHour') === '' && Number(watch('totalHour')) < 1 && watch('Location') !== ''
                               // }
                               onClick={onClickNextAction}
-                              className="h-full px-10 bg-[#BD4545] rounded-lg font-bold text-lg text-[#F0D171]"
+                              className="hover:bg-red-800 h-full px-10 bg-[#BD4545] rounded-lg font-bold text-lg text-[#F0D171]"
                            >
                               {translate('Continue')}
                            </button>
@@ -502,12 +501,12 @@ export const GuideProfile = () => {
                            <div className="col-span-2 flex items-center justify-center">
                               <div className="min-w-[507px] h-[100px] border-[2px] gap-10 border-[#BD4545] flex items-center justify-between pl-4 rounded-[16px] bg-[#FDF9ED]">
                                  <p className="max-w-max text-[32px] font-bold text-[#BD4545]">
-                                    {priceFormat(Number(watch('totalHour')) * 100000)} VND
+                                    {priceFormat(Number(watch('totalHour')) * 75000)}
                                  </p>
                                  <button
                                     type="submit"
                                     // to={ROUTE_PATH.BOOKING + '/' + data?.id}
-                                    className="min-w-[230px] h-full flex items-center justify-center bg-[#BD4545] text-[#F0D171] rounded-[13px] text-[32px] font-bold"
+                                    className="hover:bg-red-800 min-w-[230px] h-full flex items-center justify-center bg-[#BD4545] text-[#F0D171] rounded-[13px] text-[32px] font-bold"
                                  >
                                     {translate('Booking')}
                                  </button>

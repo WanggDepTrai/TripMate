@@ -4,6 +4,7 @@ import { SvgIcon, cn } from '@helpers';
 import { useSearchParamsHook } from '@hooks';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 export const AllCustomer = () => {
    const [open, setOpen] = useState(false);
@@ -13,7 +14,7 @@ export const AllCustomer = () => {
    const { data: guideDetail, refetch } = useQuery(['getGuildCusotmer', searchParams['page']], async () => {
       const page = searchParams['page'] ? String(searchParams['page']) : '1';
 
-      const res = await serviceApi.request.get('v1/admin/customers?pageNumber=' + page, {
+      const res = await serviceApi.request.get('admin/customers?pageNumber=' + page, {
          headers: {
             Authorization: `Bearer ${localStorage.getItem(SETTINGS_CONFIG.ACCESS_TOKEN_KEY)?.replace(/"/g, '')}`,
          },
@@ -23,20 +24,14 @@ export const AllCustomer = () => {
 
    const { mutate: handleBanGuide } = useMutation({
       mutationFn: async (id: string) => {
-         const res = await serviceApi.request.put(
-            `v1/admin/customers/${id}/ban`,
-            {},
-            {
-               headers: {
-                  Authorization: `Bearer ${localStorage.getItem(SETTINGS_CONFIG.ACCESS_TOKEN_KEY)?.replace(/"/g, '')}`,
-               },
-            },
-         );
-         return res.data;
+         const res = await serviceApi.request.put(`admin/customers/${id}/ban`);
+         return res;
       },
-      onSuccess: (data) => {
+      onSuccess: (data: any) => {
+         console.log(data);
          refetch();
          setOpen(false);
+         toast.success(data?.message);
          return data;
       },
    });
@@ -44,7 +39,7 @@ export const AllCustomer = () => {
    return (
       <div className="grid grid-cols-4 gap-x-4 w-full">
          <div className={cn('col-span-3 bg-white rounded-2xl', { 'col-span-4': !open })}>
-            <div className="p-5 border-b border-[#E1E1E1]">Listed Guides</div>
+            <div className="p-5 border-b border-[#E1E1E1]">Listed Customers</div>
             <div className="p-5">
                <table className="w-full table-auto">
                   <thead>
@@ -147,13 +142,13 @@ export const AllCustomer = () => {
                   <div className="flex justify-center items-center mt-3 gap-2">
                      <button
                         onClick={() => setOpen(false)}
-                        className="bg-[#F0D171] w-[150px] text-[#6D1950] px-4 py-2 rounded-lg"
+                        className="bg-[#F0D171] hover:bg-yellow-500 w-[150px] text-[#6D1950] px-4 py-2 rounded-lg"
                      >
                         Edit
                      </button>
                      {customer?.status !== 'Banned' && (
                         <button
-                           className="bg-[#7771f0] w-[150px] text-[#6D1950] px-4 py-2 rounded-lg"
+                           className="bg-[#7771f0] hover:bg-purple-800 w-[150px] text-[#6D1950] px-4 py-2 rounded-lg"
                            onClick={() => handleBanGuide(customer?.id)}
                         >
                            {customer?.status}
