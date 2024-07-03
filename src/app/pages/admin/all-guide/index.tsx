@@ -13,10 +13,10 @@ export const AllGuide = () => {
    const { data: guideDetail, refetch } = useQuery(['getGuildPagination', searchParams['page']], async () => {
       const page = searchParams['page'] ? String(searchParams['page']) : '1';
 
-      const res = await serviceApi.request.get('guides-pagination?pageNumber=' + page);
+      const res = await serviceApi.request.get('guides?pageIndex=' + page);
       return res.data;
    });
-
+console.log(guideDetail);
    const [open, setOpen] = useState(false);
 
    const { data, mutate } = useMutation({
@@ -77,7 +77,7 @@ export const AllGuide = () => {
                      </tr>
                   </thead>
                   <tbody className="">
-                     {guideDetail?.items?.map((item: any) => {
+                     {guideDetail?.map((item: any) => {
                         return (
                            <tr
                               onClick={() => {
@@ -104,7 +104,7 @@ export const AllGuide = () => {
                               <td className="p-2 text-[#6F757E] text-[14px] group-hover:text-[#050F24]">
                                  {item.status}
                               </td>
-                              <td className="p-2 text-[#6F757E] text-[14px] group-hover:text-[#050F24]">31</td>
+                              <td className="p-2 text-[#6F757E] text-[14px] group-hover:text-[#050F24]">{item.totalTour}</td>
                               <td className="p-2 text-[#6F757E] text-[14px] group-hover:text-[#050F24]">
                                  {item.rating}/5
                               </td>

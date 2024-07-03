@@ -14,7 +14,7 @@ export const AllCustomer = () => {
    const { data: guideDetail, refetch } = useQuery(['getGuildCusotmer', searchParams['page']], async () => {
       const page = searchParams['page'] ? String(searchParams['page']) : '1';
 
-      const res = await serviceApi.request.get('admin/customers?pageNumber=' + page, {
+      const res = await serviceApi.request.get('admin/customers?pageIndex=' + page, {
          headers: {
             Authorization: `Bearer ${localStorage.getItem(SETTINGS_CONFIG.ACCESS_TOKEN_KEY)?.replace(/"/g, '')}`,
          },
@@ -46,9 +46,8 @@ export const AllCustomer = () => {
                      <tr className="">
                         <th className="p-2 text-left">Name</th>
                         <th className="p-2 text-left">Phone</th>
+                        <th className="p-2 text-left">Email</th>
                         <th className="p-2 text-left">Status</th>
-                        <th className="p-2 text-left">Bookings</th>
-                        <th className="p-2 text-left">Rating</th>
                      </tr>
                   </thead>
                   <tbody className="">
@@ -67,9 +66,6 @@ export const AllCustomer = () => {
                                     <img className="w-8 h-8 rounded-full" src={item.imageURL} alt="" />
                                     <div className="">
                                        <p className="text-[14px] group-hover:text-[#050F24]">{item.fullName}</p>
-                                       <p className="text-[12px] text-[#6F757E] group-hover:text-[#050F24]">
-                                          roselle@gmail.com
-                                       </p>
                                     </div>
                                  </div>
                               </td>
@@ -77,11 +73,10 @@ export const AllCustomer = () => {
                                  {item.phoneNumber}
                               </td>
                               <td className="p-2 text-[#6F757E] text-[14px] group-hover:text-[#050F24]">
-                                 {item.status}
+                                 {item.email}
                               </td>
-                              <td className="p-2 text-[#6F757E] text-[14px] group-hover:text-[#050F24]">31</td>
                               <td className="p-2 text-[#6F757E] text-[14px] group-hover:text-[#050F24]">
-                                 {item.rating}/5
+                                 {item.status}
                               </td>
                            </tr>
                         );

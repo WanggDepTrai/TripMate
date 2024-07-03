@@ -45,7 +45,7 @@ export const Booking = () => {
    const { data, refetch } = useQuery(['getBooking', searchParams['page']], async () => {
       const page = searchParams['page'] ? String(searchParams['page']) : '1';
 
-      const res = await serviceApi.request.get('bookings-filter?pageNumber=' + page);
+      const res = await serviceApi.request.get('bookings-filter?pageIndex=' + page);
       return res.data;
    });
 

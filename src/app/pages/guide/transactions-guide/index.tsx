@@ -15,7 +15,7 @@ export const TransactionGuide = () => {
    const { data, refetch } = useQuery(['gettransactionsfilter', searchParams['page']], async () => {
       const page = searchParams['page'] ? String(searchParams['page']) : '1';
 
-      const res = await serviceApi.request.get('transactions-guide-filter?PageIndex=' + page);
+      const res = await serviceApi.request.get('transactions-guide-filter?pageIndex=' + page);
 
       return res.data;
    });
